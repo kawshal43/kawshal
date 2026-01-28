@@ -1,0 +1,212 @@
+.nav-wrap {
+  position: fixed;
+  top: 14px;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  pointer-events: none;
+}
+
+.nav {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  pointer-events: auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(79, 209, 255, 0.9);
+  box-shadow: 0 0 18px rgba(79, 209, 255, 0.55);
+}
+
+.brand-name {
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  opacity: 0.95;
+}
+
+.links {
+  display: flex;
+  gap: 18px;
+}
+
+.links a {
+  color: rgba(233, 238, 252, 0.75);
+  padding: 8px 10px;
+  border-radius: 10px;
+  transition: background .2s ease, color .2s ease, box-shadow .2s ease;
+  text-decoration: none;
+}
+
+.links a:hover {
+  color: rgba(233, 238, 252, 0.95);
+  background: rgba(255,255,255,0.05);
+}
+
+.links a.active {
+  color: rgba(233, 238, 252, 0.98);
+  background: rgba(79, 209, 255, 0.10);
+  box-shadow: 0 0 0 3px rgba(79, 209, 255, 0.10);
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icons {
+  display: flex;
+  gap: 10px;
+}
+
+.icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  color: rgba(233, 238, 252, 0.75);
+  transition: transform .15s ease, border-color .2s ease, box-shadow .2s ease;
+  text-decoration: none;
+}
+
+.icon:hover {
+  transform: translateY(-1px);
+  border-color: rgba(79, 209, 255, 0.35);
+  box-shadow: 0 0 0 3px rgba(79, 209, 255, 0.10);
+}
+
+/* Hamburger button */
+.menuBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  display: none;
+  cursor: pointer;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .15s ease;
+}
+
+.menuBtn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(79, 209, 255, 0.35);
+  box-shadow: 0 0 0 3px rgba(79, 209, 255, 0.10);
+}
+
+.menuBtn span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: rgba(233,238,252,0.80);
+  border-radius: 99px;
+  transition: transform .18s ease, opacity .18s ease;
+}
+
+.menuBtn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menuBtn.open span:nth-child(2) { opacity: 0; }
+.menuBtn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ✅ Mobile overlay */
+.mobilePanel {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;            /* above everything */
+  pointer-events: auto;     /* IMPORTANT */
+}
+
+.mobileBackdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+}
+
+.mobileMenu {
+  position: absolute;
+  top: 76px;
+  left: 12px;
+  right: 12px;
+  border-radius: 18px;
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.mobileTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 6px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 4px;
+}
+
+.mobileTitle {
+  color: rgba(233,238,252,0.92);
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.mobileClose {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  color: rgba(233,238,252,0.90);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform .15s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.mobileClose:hover {
+  transform: translateY(-1px);
+  border-color: rgba(79, 209, 255, 0.35);
+  box-shadow: 0 0 0 3px rgba(79, 209, 255, 0.10);
+}
+
+.mitem {
+  padding: 14px 12px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: rgba(233,238,252,0.82);
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.mitem:hover {
+  border-color: rgba(79, 209, 255, 0.35);
+  box-shadow: 0 0 0 3px rgba(79, 209, 255, 0.10);
+}
+
+.mitem.active {
+  background: rgba(79, 209, 255, 0.10);
+  border-color: rgba(79, 209, 255, 0.25);
+}
+
+/* Mobile */
+@media (max-width: 720px) {
+  .links { display: none; }
+  .menuBtn { display: flex; }
+}

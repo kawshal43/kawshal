@@ -1,0 +1,152 @@
+.about { padding: 36px 0 40px; }
+
+.aboutTop {
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 18px;
+  align-items: center;
+}
+
+.aboutPhotoCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.photoRingBtn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.photoHint {
+  font-size: 12px;
+  color: rgba(233,238,252,0.65);
+}
+
+.profileRing.sm {
+  width: 200px;
+  height: 200px;
+  border-radius: 999px;
+  padding: 10px;
+  background: radial-gradient(circle at 50% 50%, rgba(79,209,255,.22), rgba(45,124,255,.10), transparent 70%);
+  box-shadow: 0 0 0 1px rgba(79,209,255,0.18), 0 0 40px rgba(79,209,255,0.15);
+  transition: transform .18s ease, box-shadow .22s ease;
+}
+
+.photoRingBtn:hover .profileRing.sm {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 0 1px rgba(79,209,255,0.28), 0 0 60px rgba(79,209,255,0.22);
+}
+
+.profileImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.kicker { color: rgba(79,209,255,0.9); letter-spacing: 2px; font-size: 12px; }
+.title { margin: 8px 0; font-size: clamp(28px, 3.2vw, 44px); }
+.subtitle { color: rgba(233,238,252,0.75); margin-bottom: 12px; }
+.desc { color: rgba(233,238,252,0.70); line-height: 1.7; max-width: 70ch; }
+.aboutActions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+
+/* Timeline */
+.timeline { margin-top: 16px; padding: 18px; }
+.sectionTitle { text-align: left; margin: 0 0 14px; font-size: 22px; opacity: 0.95; }
+
+.timelineItem {
+  display: grid;
+  grid-template-columns: 90px 20px 1fr;
+  gap: 12px;
+  padding: 14px 0;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.timelineItem:first-of-type { border-top: none; }
+.year { color: rgba(233,238,252,0.75); }
+.line {
+  width: 2px;
+  background: linear-gradient(180deg, rgba(79,209,255,0.5), rgba(45,124,255,0.15));
+  border-radius: 99px;
+}
+.muted { color: rgba(233,238,252,0.65); }
+
+/* Skills */
+.skillGrid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.skillCard { padding: 16px; }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  font-size: 12px;
+  color: rgba(233,238,252,0.78);
+}
+
+.cta { margin-top: 16px; padding: 18px; text-align: center; }
+
+/* ✅ Modal */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.78);
+  backdrop-filter: blur(10px);
+  display: grid;
+  place-items: center;
+  z-index: 999999; /* very high to beat anything */
+  padding: 18px;
+}
+
+.modalCard {
+  position: relative;
+  width: min(980px, 96vw);
+  max-height: 90vh;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(10,12,18,0.85);
+  box-shadow: 0 28px 90px rgba(0,0,0,0.65);
+}
+
+.modalImg {
+  width: 100%;
+  height: auto;
+  max-height: 90vh;
+  object-fit: contain;
+  display: block;
+  background: #05070f;
+}
+
+.modalClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(0,0,0,0.35);
+  color: rgba(233,238,252,0.95);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .aboutTop { grid-template-columns: 1fr; text-align: center; }
+  .skillGrid { grid-template-columns: 1fr; }
+  .timelineItem { grid-template-columns: 70px 14px 1fr; }
+  .sectionTitle { text-align: center; }
+}

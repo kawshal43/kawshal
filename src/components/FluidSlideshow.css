@@ -1,0 +1,163 @@
+.fluidWrap {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  padding: 14px;
+}
+
+/* ✅ Original ratio stage */
+.ratioStage {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.35);
+  display: grid;
+  place-items: center;
+  padding: 10px;
+}
+
+.ratioImg {
+  max-width: 100%;
+  max-height: 70vh;      /* keeps it visible */
+  width: auto;
+  height: auto;
+  object-fit: contain;   /* ✅ never crop */
+  display: block;
+  border-radius: 12px;
+  cursor: zoom-in;
+}
+
+/* prev/next buttons */
+.stageBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(0,0,0,0.35);
+  color: rgba(233,238,252,0.95);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+}
+
+.stageBtn.left { left: 10px; }
+.stageBtn.right { right: 10px; }
+
+.fullBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(0,0,0,0.35);
+  color: rgba(233,238,252,0.95);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+
+.fluidDots {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 99px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+  cursor: pointer;
+}
+
+.dot.active {
+  background: rgba(79,209,255,0.45);
+  border-color: rgba(79,209,255,0.55);
+  box-shadow: 0 0 0 3px rgba(79,209,255,0.10);
+}
+
+/* ✅ Fullscreen viewer */
+.viewerOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.78);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+
+.viewerCard {
+  position: relative;
+  width: min(1200px, 96vw);
+  height: min(90vh, 900px);
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(10,12,18,0.80);
+  box-shadow: 0 28px 90px rgba(0,0,0,0.65);
+  display: grid;
+  place-items: center;
+}
+
+.viewerImg {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  background: #05070f;
+  padding: 12px;
+}
+
+.viewerClose {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(0,0,0,0.35);
+  color: rgba(233,238,252,0.95);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+
+.viewerNav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(0,0,0,0.35);
+  color: rgba(233,238,252,0.95);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+}
+
+.viewerNav.left { left: 12px; }
+.viewerNav.right { right: 12px; }
+
+@media (max-width: 980px) {
+  .ratioImg { max-height: 55vh; }
+}
