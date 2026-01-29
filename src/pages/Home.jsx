@@ -35,7 +35,7 @@ export default function Home() {
 
           <div className="homeActions">
             <Link className="btn primary" to="/projects">View Projects</Link>
-            <a className="btn" href="/cv.pdf" target="_blank" rel="noreferrer">Download CV</a>
+            <a className="btn" href="https://drive.google.com/file/d/1RCb3vMdrxQQvrr7t8VDWwdJllBDcP4FZ/view?usp=sharing" target="_blank" rel="noreferrer">Download CV</a>
           </div>
 
           {/* Skill cards */}

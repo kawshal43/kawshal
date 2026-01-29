@@ -40,7 +40,7 @@ export default function About() {
           </p>
 
           <div className="aboutActions">
-            <a className="btn primary" href="/cv.pdf" target="_blank" rel="noreferrer">
+            <a className="btn primary" href="https://drive.google.com/file/d/1RCb3vMdrxQQvrr7t8VDWwdJllBDcP4FZ/view?usp=sharing" target="_blank" rel="noreferrer">
               Download CV
             </a>
             <Link className="btn" to="/contact">
