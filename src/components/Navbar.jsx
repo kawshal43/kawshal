@@ -74,7 +74,7 @@ export default function Navbar() {
               <a href="#" aria-label="LinkedIn (add later)" className="icon" title="LinkedIn">
                 in
               </a>
-              <a href="#" aria-label="YouTube (add later)" className="icon" title="YouTube">
+              <a href="https://www.youtube.com/@AshinshanaKawshal" aria-label="YouTube (add later)" className="icon" title="YouTube">
                 ▶
               </a>
             </div>
