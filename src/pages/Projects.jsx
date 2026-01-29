@@ -1,9 +1,15 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { projects } from "../data/projects";
+import { categories, projects } from "../data/projects";
 import "./Projects.css";
 
-const FILTERS = ["All", "3D Animation", "Software", "Design", "Photography"];
+import fallbackThumb from "../assets/me.png";
+
+function ytPreviewSrc(id) {
+  // ✅ Autoplay + muted + inline + loop
+  // loop needs playlist=ID
+  return `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&playsinline=1&controls=0&modestbranding=1&rel=0&iv_load_policy=3&loop=1&playlist=${id}`;
+}
 
 export default function Projects() {
   const [active, setActive] = useState("All");
@@ -23,7 +29,7 @@ export default function Projects() {
           </div>
 
           <div className="filters">
-            {FILTERS.map((f) => (
+            {categories.map((f) => (
               <button
                 key={f}
                 className={`filter ${active === f ? "active" : ""}`}
@@ -36,56 +42,72 @@ export default function Projects() {
         </div>
 
         <div className="projectsGrid">
-          {list.map((p) => (
-            <article key={p.slug} className="projectCard glass">
-              {/* Image cover */}
-              <div
-                className="projectThumb"
-                style={{ backgroundImage: `url(${p.thumbnail})` }}
-              >
-                <div className="projectShade" />
-                <div className="projectTopRow">
-                  <span className="badge">{p.category}</span>
-                  <div className="miniTags">
-                    {p.tags.slice(0, 2).map((t) => (
-                      <span key={t} className="miniTag">{t}</span>
-                    ))}
+          {list.map((p) => {
+            const thumb = (p.gallery && p.gallery[0]) || p.thumbnail || fallbackThumb;
+
+            return (
+              <article key={p.id} className="projectCard glass">
+                {/* ✅ TOP MEDIA AREA */}
+                <div className="projectThumb">
+                  {p.type === "video" && p.youtubeId ? (
+                    <div className="thumbVideoWrap">
+                      <iframe
+                        className="thumbVideo"
+                        src={ytPreviewSrc(p.youtubeId)}
+                        title={`${p.title} preview`}
+                        allow="autoplay; encrypted-media; picture-in-picture"
+                        allowFullScreen
+                      />
+                      <div className="projectShade" />
+                    </div>
+                  ) : (
+                    <div
+                      className="thumbImage"
+                      style={{ backgroundImage: `url(${thumb})` }}
+                    >
+                      <div className="projectShade" />
+                    </div>
+                  )}
+
+                  <div className="projectTopRow">
+                    <span className="badge">{p.category}</span>
+                    <div className="miniTags">
+                      {(p.tags || []).slice(0, 2).map((t) => (
+                        <span key={t} className="miniTag">{t}</span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Body */}
-              <div className="projectBody">
-                <h3 className="projectName">{p.title}</h3>
-                <p className="muted">{p.description}</p>
+                {/* Body */}
+                <div className="projectBody">
+                  <h3 className="projectName">{p.title}</h3>
+                  <p className="muted">{p.description}</p>
 
-                <div className="tags">
-                  {p.tags.slice(0, 3).map((t) => (
-                    <span key={t} className="chip">{t}</span>
-                  ))}
+                  <div className="tags">
+                    {(p.tags || []).slice(0, 3).map((t) => (
+                      <span key={t} className="chip">{t}</span>
+                    ))}
+                  </div>
+
+                  <div className="projectActions">
+                    <Link className="btn primary" to={`/projects/${p.id}`}>
+                      {p.type === "video" ? "Watch" : "View"}
+                    </Link>
+                    <Link className="btn" to={`/projects/${p.id}`}>
+                      View Details
+                    </Link>
+                  </div>
                 </div>
-
-                <div className="projectActions">
-                  <Link className="btn primary" to={`/projects/${p.slug}`}>
-                    {p.type === "youtube" ? "Watch" : "View"}
-                  </Link>
-                  <Link className="btn" to={`/projects/${p.slug}`}>
-                    View Details
-                  </Link>
-                </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
 
         <div className="projectsCta glass">
           <h2>Need a creative expert for your next project?</h2>
-          <p className="muted">
-            Let’s collaborate to bring your ideas to life.
-          </p>
-          <Link className="btn primary" to="/contact">
-            Contact Me
-          </Link>
+          <p className="muted">Let’s collaborate to bring your ideas to life.</p>
+          <Link className="btn primary" to="/contact">Contact Me</Link>
         </div>
       </div>
     </section>

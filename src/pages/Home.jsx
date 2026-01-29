@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import me from "../assets/me.png";
-import a from "../assets/a.jpg";
-import b from "../assets/b.jpg";
-import c from "../assets/c.jpg";
+
+// ✅ NEW thumbnails from src/assets/homeThub/
+import animThumb from "../assets/homeThub/3DAnimation.jpg";
+import devThumb from "../assets/homeThub/development.jpg";
+import photoThumb from "../assets/homeThub/photography.jpg";
+
 import "./Home.css";
 
 export default function Home() {
@@ -37,7 +40,7 @@ export default function Home() {
 
           {/* Skill cards */}
           <div className="skillGrid">
-            <div className="skillCard glass" style={{ backgroundImage: `url(${a})` }}>
+            <div className="skillCard glass" style={{ backgroundImage: `url(${animThumb})` }}>
               <div className="skillShade" />
               <div className="skillBody">
                 <h3>3D Animation</h3>
@@ -52,7 +55,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="skillCard glass" style={{ backgroundImage: `url(${b})` }}>
+            <div className="skillCard glass" style={{ backgroundImage: `url(${devThumb})` }}>
               <div className="skillShade" />
               <div className="skillBody">
                 <h3>AI-Assisted Development</h3>
@@ -68,7 +71,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="skillCard glass" style={{ backgroundImage: `url(${c})` }}>
+            <div className="skillCard glass" style={{ backgroundImage: `url(${photoThumb})` }}>
               <div className="skillShade" />
               <div className="skillBody">
                 <h3>Photography & Editing</h3>

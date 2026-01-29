@@ -1,9 +1,10 @@
 .details { padding: 36px 0 40px; }
-
 .pd { padding: 18px; }
 
 .pdTop { margin-bottom: 14px; }
 .pdTitle { margin: 10px 0 8px; font-size: clamp(28px, 3.2vw, 44px); }
+
+.sectionTitle { margin: 0 0 8px; }
 
 .contentBox { margin-top: 12px; }
 
@@ -21,15 +22,25 @@
   display: block;
 }
 
-.placeholder {
-  padding: 18px;
-  border-radius: 16px;
-  text-align: center;
+.hint {
+  margin-top: 10px;
+  color: rgba(233,238,252,0.62);
+  font-size: 13px;
 }
 
-.inner { padding: 16px; border-radius: 16px; }
+.inner {
+  padding: 16px;
+  border-radius: 16px;
+  margin-top: 14px;
+}
 
-.subTitle { margin-top: 12px; }
+.detailsText {
+  margin: 10px 0 0;
+  white-space: pre-wrap;
+  line-height: 1.7;
+  color: rgba(233,238,252,0.75);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
 
 .pdTags {
   margin-top: 14px;

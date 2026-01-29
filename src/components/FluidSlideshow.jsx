@@ -1,105 +1,103 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import "./FluidSlideshow.css";
 
-export default function FluidSlideshow({
-  images = [],
-  intervalMs = 2600,
-  className = "",
-}) {
-  const safeImages = useMemo(() => images.filter(Boolean), [images]);
+export default function FluidSlideshow({ images = [], intervalMs = 2600 }) {
   const [index, setIndex] = useState(0);
-  const timerRef = useRef(null);
+  const [paused, setPaused] = useState(false);
+  const wrapRef = useRef(null);
 
-  const [viewerOpen, setViewerOpen] = useState(false);
+  const safeImages = useMemo(() => (Array.isArray(images) ? images : []), [images]);
+  const total = safeImages.length;
+
+  const goNext = () => {
+    if (!total) return;
+    setIndex((i) => (i + 1) % total);
+  };
+
+  const goPrev = () => {
+    if (!total) return;
+    setIndex((i) => (i - 1 + total) % total);
+  };
+
+  const toggleFullscreen = async () => {
+    const el = wrapRef.current;
+    if (!el) return;
+
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      } else {
+        await el.requestFullscreen();
+      }
+    } catch {
+      // ignore
+    }
+  };
 
   useEffect(() => {
-    if (!safeImages.length) return;
+    if (!total) return;
+    if (paused) return;
 
-    timerRef.current = setInterval(() => {
-      setIndex((i) => (i + 1) % safeImages.length);
-    }, intervalMs);
-
-    return () => clearInterval(timerRef.current);
-  }, [safeImages.length, intervalMs]);
+    const t = setInterval(goNext, intervalMs);
+    return () => clearInterval(t);
+  }, [paused, intervalMs, total]);
 
   useEffect(() => {
     const onKey = (e) => {
-      if (!viewerOpen) return;
-      if (e.key === "Escape") setViewerOpen(false);
-      if (e.key === "ArrowRight") setIndex((i) => (i + 1) % safeImages.length);
-      if (e.key === "ArrowLeft") setIndex((i) => (i - 1 + safeImages.length) % safeImages.length);
+      if (!total) return;
+      if (e.key === "ArrowRight") goNext();
+      if (e.key === "ArrowLeft") goPrev();
+      if (e.key === "Escape" && document.fullscreenElement) document.exitFullscreen();
     };
+
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [viewerOpen, safeImages.length]);
+  }, [total]);
 
-  if (!safeImages.length) return null;
-  const current = safeImages[index];
-
-  const prev = () => setIndex((i) => (i - 1 + safeImages.length) % safeImages.length);
-  const next = () => setIndex((i) => (i + 1) % safeImages.length);
+  if (!total) {
+    return (
+      <div className="fsEmpty glass">
+        <h3>No images</h3>
+        <p className="muted">This project gallery is empty.</p>
+      </div>
+    );
+  }
 
   return (
-    <>
-      <div className={`fluidWrap ${className}`}>
-        {/* ✅ show ORIGINAL ratio: no fixed height, no crop */}
-        <div className="ratioStage">
-          <img
-            className="ratioImg"
-            src={current}
-            alt="Project"
-            onClick={() => setViewerOpen(true)}
-            title="Click to open fullscreen"
-          />
-
-          <button className="stageBtn left" onClick={prev} aria-label="Previous">
-            ‹
-          </button>
-          <button className="stageBtn right" onClick={next} aria-label="Next">
-            ›
-          </button>
-
-          <button
-            className="fullBtn"
-            onClick={() => setViewerOpen(true)}
-            aria-label="Fullscreen"
-            title="Fullscreen"
-          >
-            ⤢
-          </button>
-        </div>
-
-        <div className="fluidDots">
-          {safeImages.slice(0, 20).map((_, i) => (
-            <button
-              key={i}
-              className={`dot ${i === index ? "active" : ""}`}
-              onClick={() => setIndex(i)}
-              aria-label={`Slide ${i + 1}`}
-            />
-          ))}
-        </div>
+    <div
+      className="fsWrap"
+      ref={wrapRef}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div className="fsStage">
+        <img className="fsImg" src={safeImages[index]} alt={`Slide ${index + 1}`} />
       </div>
 
-      {/* ✅ Fullscreen Viewer */}
-      {viewerOpen && (
-        <div className="viewerOverlay" onMouseDown={() => setViewerOpen(false)}>
-          <div className="viewerCard" onMouseDown={(e) => e.stopPropagation()}>
-            <button className="viewerClose" onClick={() => setViewerOpen(false)} aria-label="Close">
-              ✕
-            </button>
+      <button className="fsBtn fsPrev" onClick={goPrev} aria-label="Previous image">
+        ‹
+      </button>
+      <button className="fsBtn fsNext" onClick={goNext} aria-label="Next image">
+        ›
+      </button>
 
-            <button className="viewerNav left" onClick={prev} aria-label="Previous">
-              ‹
-            </button>
-            <button className="viewerNav right" onClick={next} aria-label="Next">
-              ›
-            </button>
-
-            <img className="viewerImg" src={current} alt="Fullscreen" />
-          </div>
+      <div className="fsBar">
+        <div className="fsDots">
+          {safeImages.slice(0, Math.min(total, 12)).map((_, i) => (
+            <span key={i} className={`fsDot ${i === index ? "on" : ""}`} />
+          ))}
+          {total > 12 && <span className="fsDotMore">+{total - 12}</span>}
         </div>
-      )}
-    </>
+
+        <div className="fsMeta">
+          <span className="fsCount">
+            {index + 1}/{total}
+          </span>
+          <button className="fsFull" onClick={toggleFullscreen}>
+            Fullscreen
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

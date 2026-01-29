@@ -51,11 +51,37 @@
   box-shadow: 0 28px 70px rgba(0,0,0,0.55), 0 0 0 3px rgba(79,209,255,0.08);
 }
 
+/* ✅ unified thumb container */
 .projectThumb {
   position: relative;
   height: 200px;
+  overflow: hidden;
+}
+
+/* image mode */
+.thumbImage {
+  position: absolute;
+  inset: 0;
   background-size: cover;
   background-position: center;
+}
+
+/* video mode */
+.thumbVideoWrap {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+}
+
+.thumbVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  transform: scale(1.08); /* slight zoom to hide youtube black edges */
+  pointer-events: none;   /* ✅ so card buttons are clickable */
+  filter: contrast(1.02) saturate(1.02);
 }
 
 .projectShade {
@@ -71,6 +97,7 @@
   justify-content: space-between;
   gap: 10px;
   align-items: center;
+  z-index: 2;
 }
 
 .badge {
